@@ -35,9 +35,9 @@ bool	RPN::checkArgs( char **argv )
 
 	for (size_t i = 0; i < _input.length(); i++)
 	{
-		if (!std::strchr(ALLOWED_CHARACTERES, _input[i]))
+		if (!strchr(ALLOWED_CHARACTERES, _input[i]))
 			return false;
-		else if (std::strchr(ALLOWED_OPERATORS, _input[i]))
+		else if (strchr(ALLOWED_OPERATORS, _input[i]))
 			operators++;
 		else if (_input[i] != ' ')
 			operands++;
@@ -60,7 +60,7 @@ bool	RPN::startCalculations( void )
 
 	for (size_t i = 0; i < _input.length(); i++)
 	{
-		if (std::strchr(ALLOWED_NUMBERS, _input[i]))
+		if (strchr(ALLOWED_NUMBERS, _input[i]))
 		{
 			std::string charString(1, _input[i]);
 			numberExtracted = std::atoi(charString.c_str());
@@ -75,7 +75,7 @@ bool	RPN::startCalculations( void )
 
 bool	RPN::isOperator(const char c) const
 {
-	return (std::strchr(ALLOWED_OPERATORS, c));
+	return (strchr(ALLOWED_OPERATORS, c));
 }
 
 void	RPN::doTheMath( const char c )
