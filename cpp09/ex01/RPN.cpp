@@ -13,7 +13,10 @@ RPN::~RPN( void ) {}
 RPN &	RPN::operator=( RPN const & rhs )
 {
 	if (this != &rhs)
+	{
 		this->_stack = rhs._stack;
+		this->_input = rhs._input;
+	}
 	return *this;
 }
 
@@ -24,7 +27,8 @@ bool	RPN::calculator( char **argv )
 	return startCalculations();
 }
 
-bool	RPN::checkArgs( char **argv ) {
+bool	RPN::checkArgs( char **argv )
+{
 	size_t operators = 0;
 	size_t operands = 0;
 	_input = argv[1];
