@@ -2,7 +2,7 @@
 CXX = g++-12
 # CXX = clang
 
-NAME = RPN
+NAME = btc
 
 SRCS = main.cpp BitcoinExchange.cpp
 

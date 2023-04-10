@@ -79,6 +79,8 @@
 		"memory_resource": "cpp",
 		"utility": "cpp",
 		"stop_token": "cpp",
-		"thread": "cpp"
+		"thread": "cpp",
+		"__tree": "cpp",
+		"map": "cpp"
 	}
 }
