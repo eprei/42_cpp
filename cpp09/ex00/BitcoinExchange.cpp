@@ -84,9 +84,9 @@ bool	BitcoinExchange::openFiles( char **argv)
 bool	BitcoinExchange::printError( int i, const std::string &str) const
 {
 	if (i == 1)
-		std::cerr << "Error: data.csv could not be opened" << std::endl;
+		std::cout << "Error: data.csv could not be opened" << std::endl;
 	else if ( i == 2)
-		std::cerr << "Error: " << str << " could not be opened" << std::endl;
+		std::cout << "Error: " << str << " could not be opened" << std::endl;
 	return false;
 }
 
@@ -103,17 +103,17 @@ void	BitcoinExchange::printResults( std::string &key, float &value )
 bool	BitcoinExchange::validInput(std::string &key, float &value){
 	if ( validDate( key ) == false)
 	{
-		std::cerr << "Error: bad input => " << key << std::endl;
+		std::cout << "Error: bad input => " << key << std::endl;
 		return false;
 	}
 	else if ( value < 0)
 	{
-		std::cerr << "Error: not a positive number." << std::endl;
+		std::cout << "Error: not a positive number." << std::endl;
 		return false;
 	}
 	else if ( value > 1000)
 	{
-		std::cerr << "Error: too large a number." << std::endl;
+		std::cout << "Error: too large a number." << std::endl;
 		return false;
 	}
 	return true;
