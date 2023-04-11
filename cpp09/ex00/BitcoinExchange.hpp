@@ -1,11 +1,6 @@
 #ifndef BITCOINEXCHANGE_HPP
 # define BITCOINEXCHANGE_HPP
 
-# define RESET					"\033[0m"
-# define RED					"\033[31m"
-# define GREEN					"\033[32m"
-# define YELLOW					"\033[33m"
-
 # include <iostream>
 # include <map>
 # include <stdio.h>
@@ -14,9 +9,6 @@
 # include <stdlib.h>
 # include <fstream>
 # include <sstream>
-
-// TO DO: CHANGE DOUBLE TO FLOAT IN MAPS !!!
-//			and solve Error: bad input => date
 
 class BitcoinExchange{
 
@@ -31,8 +23,8 @@ class BitcoinExchange{
 		bool	startExchange( char **argv );
 		bool	printError( int i , const std::string &str) const;
 		bool	openFiles( char **argv );
-		void	printResults( std::string &key, double &value );
-		bool	validInput(std::string &key, double &value);
+		void	printResults( std::string &key, float &value );
+		bool	validInput(std::string &key, float &value);
 		bool	validDate(const std::string &str);
 		bool	checkChars(std::string date);
 
@@ -40,8 +32,8 @@ class BitcoinExchange{
 
 		std::ifstream					_hisroticCsvFile;
 		std::ifstream					_userInputFile;
-		std::map<std::string, double>	_csvMap;
-		std::map<std::string, double>	_inputMap;
+		std::map<std::string, float>	_csvMap;
+		std::map<std::string, float>	_inputMap;
 };
 
 #endif

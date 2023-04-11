@@ -24,12 +24,12 @@ bool	BitcoinExchange::startExchange( char **argv )
 	return true;
 }
 
-void	resetVariables(std::string &line, std::string &keyStr, std::string &valueStr, double &valueDouble)
+void	resetVariables(std::string &line, std::string &keyStr, std::string &valueStr, float &valueFloat)
 {
 	line.clear();
 	keyStr.clear();
 	valueStr.clear();
-	valueDouble = 0;
+	valueFloat = 0;
 }
 
 bool	BitcoinExchange::openFiles( char **argv)
@@ -37,7 +37,7 @@ bool	BitcoinExchange::openFiles( char **argv)
 	std::string line;
 	std::string keyStr;
 	std::string	valueStr;
-	double		valueDouble;
+	float		valueFloat;
 
 	_hisroticCsvFile.open("data.csv");
 	if ( _hisroticCsvFile.is_open() == false )
@@ -54,13 +54,13 @@ bool	BitcoinExchange::openFiles( char **argv)
 
 		std::getline(ss, keyStr, ',');
 		std::getline(ss, valueStr, ',');
-		valueDouble = std::atof(valueStr.c_str());
-		_csvMap[keyStr] = valueDouble;
+		valueFloat = std::atof(valueStr.c_str());
+		_csvMap[keyStr] = valueFloat;
 		keyStr.clear();
 		valueStr.clear();
 	}
 	_hisroticCsvFile.close();
-	resetVariables(line, keyStr, valueStr, valueDouble);
+	resetVariables(line, keyStr, valueStr, valueFloat);
 	while (std::getline(_userInputFile, line))
 	{
 		std::stringstream ss(line);
@@ -69,8 +69,11 @@ bool	BitcoinExchange::openFiles( char **argv)
 		std::getline(ss, valueStr, '|');
 		if (keyStr.length() > 10 && keyStr.at(10) == ' ')
 			keyStr.erase(keyStr.length() - 1);
-		valueDouble = std::atof(valueStr.c_str());
-		printResults(keyStr, valueDouble);
+		if (keyStr != "date ")
+		{
+			valueFloat = std::atof(valueStr.c_str());
+			printResults(keyStr, valueFloat);
+		}
 		keyStr.clear();
 		valueStr.clear();
 	}
@@ -87,30 +90,30 @@ bool	BitcoinExchange::printError( int i, const std::string &str) const
 	return false;
 }
 
-void	BitcoinExchange::printResults( std::string &key, double &value )
+void	BitcoinExchange::printResults( std::string &key, float &value )
 {
 	if ( validInput( key, value ) == false)
 		return;
-	std::map<std::string, double>::iterator itup = _csvMap.upper_bound(key);
+	std::map<std::string, float>::iterator itup = _csvMap.upper_bound(key);
 	if (itup != _csvMap.begin())
 		itup--;
 	std::cout << key << " => " << value << " = " << value * itup->second << std::endl;
 }
 
-bool	BitcoinExchange::validInput(std::string &key, double &value){
+bool	BitcoinExchange::validInput(std::string &key, float &value){
 	if ( validDate( key ) == false)
 	{
-		std::cout << "Error: bad input => " << key << std::endl;
+		std::cerr << "Error: bad input => " << key << std::endl;
 		return false;
 	}
 	else if ( value < 0)
 	{
-		std::cout << "Error: not a positive number." << std::endl;
+		std::cerr << "Error: not a positive number." << std::endl;
 		return false;
 	}
 	else if ( value > 1000)
 	{
-		std::cout << "Error: too large a number." << std::endl;
+		std::cerr << "Error: too large a number." << std::endl;
 		return false;
 	}
 	return true;
