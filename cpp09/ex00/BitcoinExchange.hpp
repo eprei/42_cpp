@@ -17,7 +17,7 @@
 
 // TO DO: CHANGE DOUBLE TO FLOAT IN MAPS !!!
 //			and solve Error: bad input => date
-// TO CONSIDER: when user do 2001-42-42 with no second argument
+
 class BitcoinExchange{
 
 	public:
@@ -31,8 +31,8 @@ class BitcoinExchange{
 		bool	startExchange( char **argv );
 		bool	printError( int i , const std::string &str) const;
 		bool	openFiles( char **argv );
-		void	printResults( void );
-		bool	validInput(std::map<std::string, double>::iterator it);
+		void	printResults( std::string &key, double &value );
+		bool	validInput(std::string &key, double &value);
 		bool	validDate(const std::string &str);
 		bool	checkChars(std::string date);
 
