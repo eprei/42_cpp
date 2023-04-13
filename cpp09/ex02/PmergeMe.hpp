@@ -23,7 +23,7 @@
 # define CYAN		"\033[36m"
 # define WHITE		"\033[37m"
 
-# define RUN 8
+# define RUN 4
 
 class PmergeMe{
 

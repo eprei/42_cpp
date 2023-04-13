@@ -6,7 +6,7 @@ NAME = PmergeMe
 
 SRCS = main.cpp PmergeMe.cpp Vector.cpp List.cpp
 
-CFLAGS = -Werror -Wextra -Wall -std=c++98 -g #-pedantic
+CFLAGS = -Werror -Wextra -Wall -std=c++98 #-fsanitize=address #-g3 #-pedantic
 
 OBJ = $(SRCS:.cpp=.o)
 

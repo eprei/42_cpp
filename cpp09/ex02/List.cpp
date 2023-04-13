@@ -76,17 +76,67 @@ void PmergeMe::executeListSortingAlgorithm( void )
 {
 	// int listSize = _inputList.size();
 
-	for (std::list<int>::iterator i = _inputList.begin(); i != _inputList.end(); i = addRunSizeOrToTheTnd(i))
-	{
-		std::cout << YELLOW << "\tSOS VOS EL PROBLEMA\n" << RESET;
-		std::list<int>::iterator rightLimit = i;
-		for (int i = 0; i < RUN && rightLimit != --_inputList.end() ; i++)
-			rightLimit++;
-		std::cout << "before send to insertion" << std::endl;
-		printList(i, rightLimit);
-		insertionSortList(i, rightLimit);
+	std::list<int>::iterator begin = before(_inputList.begin(), -1);
+	double		ratio =  static_cast<double>(_inputList.size()) / RUN;
+	double		numOfParts = 0.0;
 
+	while ( numOfParts < ratio )
+	{
+		std::cout << YELLOW << "\tCHUNKS\n" << RESET;
+		int offset = numOfParts * RUN + 1;
+
+
+		std::list<int>::iterator leftLimit = next(begin, offset);
+		std::list<int>::iterator rightLimit = next(begin, offset);
+
+
+
+		for (int i = 0; i < RUN && rightLimit != _inputList.end() ; i++)
+			rightLimit++;
+
+		std::cout << "offset = " << offset <<std::endl;
+		std::cout << "leftLimit = " << *leftLimit <<std::endl;
+		std::cout << "rightLimit = " << *rightLimit <<std::endl;
+
+
+		if ( *leftLimit != *rightLimit)
+		{
+			std::cout << "before send to insertion" << std::endl;
+			printList(leftLimit, rightLimit);
+			insertionSortList(leftLimit, rightLimit);
+		}
+		else
+			std::cout << RED << "\n\tleft and right are the same" << RESET << std::endl;
+
+
+		numOfParts++;
 	}
+
+	// for (std::list<int>::iterator i = _inputList.begin(); i != _inputList.end(); i = addRunSizeOrToTheTnd(i))
+	// {
+	// 	std::cout << YELLOW << "\tSOS VOS EL PROBLEMA\n" << RESET;
+	// 	std::list<int>::iterator rightLimit = i;
+	// 	for (int i = 0; i < RUN && rightLimit != --_inputList.end() ; i++)
+	// 		rightLimit++;
+	// 	std::cout << "before send to insertion" << std::endl;
+	// 	printList(i, rightLimit);
+	// 	insertionSortList(i, rightLimit);
+
+	// }
+
+
+
+	// for (std::list<int>::iterator i = _inputList.begin(); i != _inputList.end(); i = addRunSizeOrToTheTnd(i))
+	// {
+	// 	std::cout << YELLOW << "\tSOS VOS EL PROBLEMA\n" << RESET;
+	// 	std::list<int>::iterator rightLimit = i;
+	// 	for (int i = 0; i < RUN && rightLimit != --_inputList.end() ; i++)
+	// 		rightLimit++;
+	// 	std::cout << "before send to insertion" << std::endl;
+	// 	printList(i, rightLimit);
+	// 	insertionSortList(i, rightLimit);
+
+	// }
 
 	// for (int sizeOfChunk = RUN; sizeOfChunk < listSize; sizeOfChunk = 2 * sizeOfChunk)
 	// { // TO DO!!! FROM HERE< CHECK SUBSTITUIR NEXT WITH ADVANCE
@@ -107,7 +157,8 @@ void PmergeMe::executeListSortingAlgorithm( void )
 void		PmergeMe::insertionSortList(std::list<int>::iterator leftLimit, std::list<int>::iterator rightLimit)
 {
 	std::list<int>::iterator begin = before(leftLimit, - 1);
-	std::list<int>::iterator end = next(rightLimit, 1);
+	// std::list<int>::iterator end = next(rightLimit, 1);
+	std::list<int>::iterator end = rightLimit;
 
 	std::cout << "print chunk before\n";
 	printList(leftLimit, rightLimit);
@@ -148,7 +199,7 @@ void		PmergeMe::insertionSortList(std::list<int>::iterator leftLimit, std::list<
 		}
 	}
 	std::cout << "print chunk after\n";
-	printList(next(begin, 1), before(end, -1));
+	printList(next(begin, 1), end);
 }
 
 void		PmergeMe::mergeList(std::list<int>::iterator leftLimit, std::list<int>::iterator midPoint, std::list<int>::iterator rightLimit)
@@ -211,5 +262,4 @@ void	PmergeMe::printList(std::list<int>::iterator begin, std::list<int>::iterato
 		std::cout << *it << " ";
 	std::cout << std::endl;
 }
-
 
