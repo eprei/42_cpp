@@ -13,7 +13,17 @@
 # include <unistd.h>
 # include <algorithm>
 
-# define RUN 32
+# define RESET		"\033[0m"
+# define BLACK		"\033[30m"
+# define RED		"\033[31m"
+# define GREEN		"\033[32m"
+# define YELLOW		"\033[33m"
+# define BLUE		"\033[34m"
+# define MAGENTA	"\033[35m"
+# define CYAN		"\033[36m"
+# define WHITE		"\033[37m"
+
+# define RUN 8
 
 class PmergeMe{
 
@@ -30,20 +40,23 @@ class PmergeMe{
 		int			printError( std::string str , int i ) const;
 		int			startProcess( int argc, char **argv );
 		int			checkArgs( int argc, char **argv );
-		void		mergeInsertVector( int argc, char **argv );
-		void		mergeInsertList( int argc, char **argv );
 		void		printResults( void );
 
-		// void		executeVectorSortingAlgorithm( void );
-		// void		mergeSortVector( int left, int mid, int right );
-		// void		insertionSortVector( int left, int right );
+		void		startMergeInsertVector( int argc, char **argv );
+		void		executeVectorSortingAlgorithm( void );
+		void		insertionSortVector( int left, int right );
+		void		mergeVector( int left, int mid, int right );
 
-void	insertionSort(std::vector<int>& arr, int left, int right);
-void	merge(std::vector<int>& arr, int left, int mid, int right);
-void	mergeInsertSort(std::vector<int>& arr);
+		void		startMergeInsertList( int argc, char **argv );
+		void		executeListSortingAlgorithm( void );
+		void		insertionSortList( std::list<int>::iterator leftLimit, std::list<int>::iterator rightLimit );
+		void		mergeList( std::list<int>::iterator leftLimit, std::list<int>::iterator midPoint, std::list<int>::iterator rightLimit );
+
+		std::list<int>::iterator	addRunSizeOrToTheTnd(std::list<int>::iterator it );
+		void						printList();
+		void						printList(std::list<int>::iterator begin, std::list<int>::iterator end);
 
 	private:
-
 
 		char				**_originalInput;
 

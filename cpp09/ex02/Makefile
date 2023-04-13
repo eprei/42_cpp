@@ -4,9 +4,9 @@ CXX = g++-12
 
 NAME = PmergeMe
 
-SRCS = main.cpp PmergeMe.cpp
+SRCS = main.cpp PmergeMe.cpp Vector.cpp List.cpp
 
-CFLAGS = -Werror -Wextra -Wall -std=c++98 #-g #-pedantic
+CFLAGS = -Werror -Wextra -Wall -std=c++98 -g #-pedantic
 
 OBJ = $(SRCS:.cpp=.o)
 
