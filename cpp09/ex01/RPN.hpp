@@ -38,7 +38,7 @@ class RPN{
 	private:
 
 		std::string			_input;
-		std::stack<int>		_stack;
+		std::stack<double>	_stack;
 };
 
 #endif

@@ -50,14 +50,14 @@ bool	RPN::printHelp( void ) const
 
 bool	RPN::startCalculations( void )
 {
-	int numberExtracted;
+	double numberExtracted;
 
 	for (size_t i = 0; i < _input.length(); i++)
 	{
 		if (strchr(ALLOWED_NUMBERS, _input[i]))
 		{
 			std::string charString(1, _input[i]);
-			numberExtracted = std::atoi(charString.c_str());
+			numberExtracted = std::stod(charString.c_str());
 			_stack.push(numberExtracted);
 		}
 		else if (isOperator(_input[i]))
@@ -74,9 +74,9 @@ bool	RPN::isOperator(const char c) const
 
 void	RPN::doTheMath( const char c )
 {
-	int	rightValue;
-	int	leftValue;
-	int	result;
+	double	rightValue;
+	double	leftValue;
+	double	result;
 
 	if ( _stack.size() > 1)
 	{
