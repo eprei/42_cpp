@@ -29,20 +29,14 @@ bool	RPN::calculator( char **argv )
 
 bool	RPN::checkArgs( char **argv )
 {
-	size_t operators = 0;
-	size_t operands = 0;
 	_input = argv[1];
 
 	for (size_t i = 0; i < _input.length(); i++)
 	{
 		if (!strchr(ALLOWED_CHARACTERES, _input[i]))
 			return false;
-		else if (strchr(ALLOWED_OPERATORS, _input[i]))
-			operators++;
-		else if (_input[i] != ' ')
-			operands++;
 	}
-	return (operators + 1 == operands);
+	return true;
 }
 
 bool	RPN::printHelp( void ) const
@@ -84,19 +78,21 @@ void	RPN::doTheMath( const char c )
 	int	leftValue;
 	int	result;
 
-	rightValue = _stack.top();
-	_stack.pop();
-	leftValue = _stack.top();
-	_stack.pop();
+	if ( _stack.size() > 1)
+	{
+		rightValue = _stack.top();
+		_stack.pop();
+		leftValue = _stack.top();
+		_stack.pop();
 
-	if (c == '+')
-		result = leftValue + rightValue;
-	else if (c == '-')
-		result = leftValue - rightValue;
-	else if (c == '*')
-		result = leftValue * rightValue;
-	else if (c == '/')
-		result = leftValue / rightValue;
-
-	_stack.push(result);
+		if (c == '+')
+			result = leftValue + rightValue;
+		else if (c == '-')
+			result = leftValue - rightValue;
+		else if (c == '*')
+			result = leftValue * rightValue;
+		else if (c == '/')
+			result = leftValue / rightValue;
+		_stack.push(result);
+	}
 }

@@ -4,7 +4,7 @@ CXX = g++-12
 
 NAME = PmergeMe
 
-SRCS = main.cpp PmergeMe.cpp Vector.cpp List.cpp
+SRCS = main.cpp PmergeMe.cpp Vector.cpp List.cpp Deque.cpp
 
 CFLAGS = -Werror -Wextra -Wall -std=c++98 #-fsanitize=address #-g3 #-pedantic
 

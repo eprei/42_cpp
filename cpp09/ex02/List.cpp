@@ -1,11 +1,25 @@
 #include "PmergeMe.hpp"
 
+bool	PmergeMe::isNotOnThelist( int i )
+{
+	for ( std::list<int>::iterator it = _inputList.begin(); it != _inputList.end(); it++)
+	{
+		if ( *it == i )
+			return false;
+	}
+	return true;
+}
+
+
 void	PmergeMe::startMergeInsertList( int argc, char **argv)
 {
 	gettimeofday(&_listStartTime, NULL);
 
 	for (int i = 1; i < argc; i++)
-		_inputList.push_back(atoi(argv[i]));
+	{
+		if ( isNotOnThelist(atoi(argv[i])))
+			_inputList.push_back(atoi(argv[i]));
+	}
 
 	executeListSortingAlgorithm();
 
@@ -82,7 +96,7 @@ void PmergeMe::executeListSortingAlgorithm( void )
 
 	while ( numOfParts < ratio )
 	{
-		std::cout << YELLOW << "\tCHUNKS\n" << RESET;
+		// std::cout << YELLOW << "\tCHUNKS\n" << RESET;
 		int offset = numOfParts * RUN + 1;
 
 
@@ -94,19 +108,19 @@ void PmergeMe::executeListSortingAlgorithm( void )
 		for (int i = 0; i < RUN && rightLimit != _inputList.end() ; i++)
 			rightLimit++;
 
-		std::cout << "offset = " << offset <<std::endl;
-		std::cout << "leftLimit = " << *leftLimit <<std::endl;
-		std::cout << "rightLimit = " << *rightLimit <<std::endl;
+		// std::cout << "offset = " << offset <<std::endl;
+		// std::cout << "leftLimit = " << *leftLimit <<std::endl;
+		// std::cout << "rightLimit = " << *rightLimit <<std::endl;
 
 
 		if ( *leftLimit != *rightLimit)
 		{
-			std::cout << "before send to insertion" << std::endl;
-			printList(leftLimit, rightLimit);
+			// std::cout << "before send to insertion" << std::endl;
+			// printList(leftLimit, rightLimit);
 			insertionSortList(leftLimit, rightLimit);
 		}
-		else
-			std::cout << RED << "\n\tleft and right are the same" << RESET << std::endl;
+		// else
+			// std::cout << RED << "\n\tleft and right are the same" << RESET << std::endl;
 
 
 		numOfParts++;
@@ -160,8 +174,8 @@ void		PmergeMe::insertionSortList(std::list<int>::iterator leftLimit, std::list<
 	// std::list<int>::iterator end = next(rightLimit, 1);
 	std::list<int>::iterator end = rightLimit;
 
-	std::cout << "print chunk before\n";
-	printList(leftLimit, rightLimit);
+	// std::cout << "print chunk before\n";
+	// printList(leftLimit, rightLimit);
 
 	for (std::list<int>::iterator i = next(leftLimit, 1); i != end; i++)
 	{
@@ -198,8 +212,8 @@ void		PmergeMe::insertionSortList(std::list<int>::iterator leftLimit, std::list<
 			_inputList.erase(i);
 		}
 	}
-	std::cout << "print chunk after\n";
-	printList(next(begin, 1), end);
+	// std::cout << "print chunk after\n";
+	// printList(next(begin, 1), end);
 }
 
 void		PmergeMe::mergeList(std::list<int>::iterator leftLimit, std::list<int>::iterator midPoint, std::list<int>::iterator rightLimit)

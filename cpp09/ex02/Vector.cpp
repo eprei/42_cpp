@@ -32,8 +32,6 @@ void	PmergeMe::executeVectorSortingAlgorithm( void )
 				mergeVector(leftLimit, midPoint, rightLImit);
 		}
 	}
-	// it = std::unique(_inputVector.begin(), _inputVector.end());
-	// _inputVector.resize( std::distance(_inputVector.begin(), it ) );
 }
 
 void	PmergeMe::insertionSortVector( int leftLimit, int rightLimit )

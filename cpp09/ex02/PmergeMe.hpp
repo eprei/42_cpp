@@ -12,6 +12,7 @@
 # include <climits>
 # include <unistd.h>
 # include <algorithm>
+# include <deque>
 
 # define RESET		"\033[0m"
 # define BLACK		"\033[30m"
@@ -52,9 +53,15 @@ class PmergeMe{
 		void		insertionSortList( std::list<int>::iterator leftLimit, std::list<int>::iterator rightLimit );
 		void		mergeList( std::list<int>::iterator leftLimit, std::list<int>::iterator midPoint, std::list<int>::iterator rightLimit );
 
+		void		startMergeInsertDeque( int argc, char **argv );
+		void		executeDequeSortingAlgorithm( void );
+		void		insertionSortDeque( int left, int right );
+		void		mergeDeque( int left, int mid, int right );
+
 		std::list<int>::iterator	addRunSizeOrToTheTnd(std::list<int>::iterator it );
 		void						printList();
 		void						printList(std::list<int>::iterator begin, std::list<int>::iterator end);
+		bool						isNotOnThelist( int i );
 
 	private:
 
@@ -69,6 +76,11 @@ class PmergeMe{
 		struct timeval		_listStartTime;
 		struct timeval		_listEndTime;
 		long				_listDuration;
+
+		std::deque<int>		_inputDeque;
+		struct timeval		_dequeStartTime;
+		struct timeval		_dequeEndTime;
+		long				_dequeDuration;
 
 };
 

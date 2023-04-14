@@ -49,7 +49,8 @@ int		PmergeMe::startProcess( int argc, char **argv )
 	if (checkArgs(argc, argv) == EXIT_FAILURE )
 		return EXIT_FAILURE;
 	startMergeInsertVector(argc, argv);
-	startMergeInsertList(argc, argv);
+	startMergeInsertDeque(argc, argv);
+	// startMergeInsertList(argc, argv);
 	printResults();
 	return EXIT_SUCCESS;
 }
@@ -89,12 +90,17 @@ void	PmergeMe::printResults( void )
 	for (std::vector<int>::iterator it = _inputVector.begin(); it != _inputVector.end(); it++)
 		std::cout << *it << " ";
 
-	std::cout << std::endl << "After with list:\t";
-	for (std::list<int>::iterator it = _inputList.begin(); it != _inputList.end(); it++)
+	// std::cout << std::endl << "After with list:\t";
+	// for (std::list<int>::iterator it = _inputList.begin(); it != _inputList.end(); it++)
+	// 	std::cout << *it << " ";
+
+	std::cout << std::endl << "After with deque:\t";
+	for (std::deque<int>::iterator it = _inputDeque.begin(); it != _inputDeque.end(); it++)
 		std::cout << *it << " ";
 
 	std::cout << std::endl << "Time to process a range of " << _inputVector.size() << " elements with std::vector :" << _vectorDuration << " us" << std::endl;
-	std::cout << "Time to process a range of " << _inputList.size() << " elements with std::list :" << _listDuration << " us" << std::endl;
+	std::cout << "Time to process a range of " << _inputDeque.size() << " elements with std::deque :" << _dequeDuration << " us" << std::endl;
+	// std::cout << "Time to process a range of " << _inputList.size() << " elements with std::list :" << _listDuration << " us" << std::endl;
 
 	return;
 }
