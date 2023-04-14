@@ -6,7 +6,6 @@
 # include <string.h>
 # include <stdlib.h>
 # include <vector>
-# include <list>
 # include <ctime>
 # include <sys/time.h>
 # include <climits>
@@ -24,7 +23,7 @@
 # define CYAN		"\033[36m"
 # define WHITE		"\033[37m"
 
-# define RUN 4
+# define RUN 32
 
 class PmergeMe{
 
@@ -48,20 +47,10 @@ class PmergeMe{
 		void		insertionSortVector( int left, int right );
 		void		mergeVector( int left, int mid, int right );
 
-		void		startMergeInsertList( int argc, char **argv );
-		void		executeListSortingAlgorithm( void );
-		void		insertionSortList( std::list<int>::iterator leftLimit, std::list<int>::iterator rightLimit );
-		void		mergeList( std::list<int>::iterator leftLimit, std::list<int>::iterator midPoint, std::list<int>::iterator rightLimit );
-
 		void		startMergeInsertDeque( int argc, char **argv );
 		void		executeDequeSortingAlgorithm( void );
 		void		insertionSortDeque( int left, int right );
 		void		mergeDeque( int left, int mid, int right );
-
-		std::list<int>::iterator	addRunSizeOrToTheTnd(std::list<int>::iterator it );
-		void						printList();
-		void						printList(std::list<int>::iterator begin, std::list<int>::iterator end);
-		bool						isNotOnThelist( int i );
 
 	private:
 
@@ -71,11 +60,6 @@ class PmergeMe{
 		struct timeval		_vectorStartTime;
 		struct timeval		_vectorEndTime;
 		long				_vectorDuration;
-
-		std::list<int>		_inputList;
-		struct timeval		_listStartTime;
-		struct timeval		_listEndTime;
-		long				_listDuration;
 
 		std::deque<int>		_inputDeque;
 		struct timeval		_dequeStartTime;

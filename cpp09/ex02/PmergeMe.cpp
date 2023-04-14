@@ -18,10 +18,10 @@ PmergeMe	&PmergeMe::operator=( PmergeMe const & rhs )
 		this->_vectorStartTime = rhs._vectorStartTime;
 		this->_vectorEndTime = rhs._vectorEndTime;
 		this->_vectorDuration = rhs._vectorDuration;
-		this->_inputList = rhs._inputList;
-		this->_listStartTime = rhs._listStartTime;
-		this->_listEndTime = rhs._listEndTime;
-		this->_listDuration = rhs._listDuration;
+		this->_inputDeque = rhs._inputDeque;
+		this->_dequeStartTime = rhs._dequeStartTime;
+		this->_dequeEndTime = rhs._dequeEndTime;
+		this->_dequeDuration = rhs._dequeDuration;
 	}
 	return *this;
 }
@@ -50,7 +50,6 @@ int		PmergeMe::startProcess( int argc, char **argv )
 		return EXIT_FAILURE;
 	startMergeInsertVector(argc, argv);
 	startMergeInsertDeque(argc, argv);
-	// startMergeInsertList(argc, argv);
 	printResults();
 	return EXIT_SUCCESS;
 }
@@ -79,7 +78,6 @@ int		PmergeMe::checkArgs( int argc, char **argv )
 	return EXIT_SUCCESS;
 }
 
-// TO DO: the right print the ordered secuence and may be test thath both containers has the same result
 void	PmergeMe::printResults( void )
 {
 	std::cout << "Before:\t\t\t";
@@ -90,17 +88,12 @@ void	PmergeMe::printResults( void )
 	for (std::vector<int>::iterator it = _inputVector.begin(); it != _inputVector.end(); it++)
 		std::cout << *it << " ";
 
-	// std::cout << std::endl << "After with list:\t";
-	// for (std::list<int>::iterator it = _inputList.begin(); it != _inputList.end(); it++)
-	// 	std::cout << *it << " ";
-
 	std::cout << std::endl << "After with deque:\t";
 	for (std::deque<int>::iterator it = _inputDeque.begin(); it != _inputDeque.end(); it++)
 		std::cout << *it << " ";
 
 	std::cout << std::endl << "Time to process a range of " << _inputVector.size() << " elements with std::vector :" << _vectorDuration << " us" << std::endl;
 	std::cout << "Time to process a range of " << _inputDeque.size() << " elements with std::deque :" << _dequeDuration << " us" << std::endl;
-	// std::cout << "Time to process a range of " << _inputList.size() << " elements with std::list :" << _listDuration << " us" << std::endl;
 
 	return;
 }
