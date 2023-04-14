@@ -1,6 +1,5 @@
-# CXX = c++
-CXX = g++-12
-# CXX = clang
+CXX = c++
+# CXX = g++-12
 
 NAME = RPN
 

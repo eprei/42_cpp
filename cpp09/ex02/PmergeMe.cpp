@@ -80,16 +80,12 @@ int		PmergeMe::checkArgs( int argc, char **argv )
 
 void	PmergeMe::printResults( void )
 {
-	std::cout << "Before:\t\t\t";
+	std::cout << "Before:\t";
 	for (size_t i = 1; _originalInput[i] != 0 ; i++)
 		std::cout << _originalInput[i] << " ";
 
-	std::cout << std::endl << "After with vector:\t";
+	std::cout << std::endl << "After:\t";
 	for (std::vector<int>::iterator it = _inputVector.begin(); it != _inputVector.end(); it++)
-		std::cout << *it << " ";
-
-	std::cout << std::endl << "After with deque:\t";
-	for (std::deque<int>::iterator it = _inputDeque.begin(); it != _inputDeque.end(); it++)
 		std::cout << *it << " ";
 
 	std::cout << std::endl << "Time to process a range of " << _inputVector.size() << " elements with std::vector :" << _vectorDuration << " us" << std::endl;

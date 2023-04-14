@@ -92,7 +92,15 @@ void	RPN::doTheMath( const char c )
 		else if (c == '*')
 			result = leftValue * rightValue;
 		else if (c == '/')
-			result = leftValue / rightValue;
+		{
+			if ( rightValue == 0 )
+			{
+				std::cout << "Error: division by zero is considered as undefined" << std::endl;
+				exit (EXIT_FAILURE);
+			}
+			else
+				result = leftValue / rightValue;
+		}
 		_stack.push(result);
 	}
 }
